@@ -5,8 +5,8 @@ networks:
     driver: bridge
 
 volumes:
-    prometheus_data: {}
-    grafana_data: {}
+  prometheus_data: {}
+  grafana_data: {}
 
 services:
 
@@ -134,5 +134,20 @@ services:
     restart: unless-stopped
     networks:
       - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  locustexporter:
+    image: locust_exporter
+    container_name: locustexporter
+    ports:
+      - "8080:8080"
+    environment:
+      - LOCUST=locust.test:8089
+    restart: unless-stopped
+    networks:
+      - monitor-net
+    extra_hosts:
+      - "locust.test:${LOCUST_HOST}"
     labels:
       org.label-schema.group: "monitoring"

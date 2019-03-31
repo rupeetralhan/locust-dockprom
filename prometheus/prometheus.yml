@@ -34,6 +34,11 @@ scrape_configs:
     static_configs:
       - targets: ['pushgateway:9091']
 
+  - job_name: 'locustexporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['locustexporter:8080']
+
 
 alerting:
   alertmanagers:

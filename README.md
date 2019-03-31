@@ -1,5 +1,42 @@
-dockprom
-========
+locust-dockprom
+===============
+
+This project is extending dockprom project with [Locust exporter](https://github.com/dduleba/locust_exporter) container
+* for [Locust](https://locust.io/) monitoring in grafana
+
+You need to provide locust master address by exporting LOCUST_HOST
+
+
+## Install
+
+### locust_exporter container
+```bash
+git clone https://github.com/dduleba/locust_exporter.git
+cd locust_exporter
+docker build --tag locust_exporter .
+```
+
+### run locust exporter with dockprom
+During start we need to define LOCUST_HOST - the locust load runner host address
+
+* bellow example with docker host address used as LOCUST_HOST
+
+```bash
+git clone https://github.com/dduleba/locust-dockprom.git
+cd locust-dockprom
+
+export LOCUST_HOST=`ip -4 addr show scope global dev docker0 | grep inet | awk '{print \$2}' | cut -d / -f 1`
+
+docker-compose up -d
+
+```
+
+### Locust dashboard
+
+![Locust dashboard](screens/locust.png "Locust dashboard")
+
+dockprom details
+================
 
 A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor),
 [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
