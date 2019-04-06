@@ -33,7 +33,7 @@ docker-compose up -d
 
 ### Locust dashboard
 
-![Locust dashboard](screens/locust.png "Locust dashboard")
+![Locust dashboard](screens/locust.png)
 
 dockprom details
 ================
