@@ -80,7 +80,7 @@ services:
       #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
     restart: unless-stopped
     expose:
-      - 8080
+      - 8082
     networks:
       - monitor-net
     labels:
@@ -141,9 +141,9 @@ services:
     image: locust_exporter
     container_name: locustexporter
     ports:
-      - "8080:8080"
+      - "8082:8082"
     environment:
-      - LOCUST=locust.test:8089
+      - LOCUST=locust.test:32289
     restart: unless-stopped
     networks:
       - monitor-net
